@@ -1,0 +1,17 @@
+.bitrun-output {
+  background: #F6FCF5;
+  border-bottom: 1px solid #E4F5E1;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  font-size: 12px;
+  white-space: pre;
+  padding: 8px;
+  display: none;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.bitrun-output.error {
+  color: #991700;
+  background: #FFE9E6;
+  border-color: #FAD7D2;
+}
