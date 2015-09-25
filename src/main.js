@@ -13,15 +13,23 @@ function runCode(payload, successCb, errorCb) {
   });
 }
 
-function renderOutput(text, container, error) {
-  var output = ansi_up.ansi_to_html(text);
-  var lines  = output.split("\r\n");
+function renderOutput(format, text, container, error) {
+  var term = $("<div/>").addClass("bitrun-output");
 
-  for (i in lines) {
-    lines[i] = "<div>" + lines[i] + "</div>";
+  if (format.indexOf("plain/text") >= 0) {
+    var output = ansi_up.ansi_to_html(text);
+    var lines  = output.split("\r\n");
+
+    for (i in lines) {
+      lines[i] = "<div>" + lines[i] + "</div>";
+    }
+
+    term.html(lines.join(""));
+  }
+  else {
+    term.html(text);
   }
 
-  var term = $("<div/>").addClass("bitrun-output").html(lines.join(""));
   if (error) {
     term.addClass("error");
   }
@@ -30,7 +38,12 @@ function renderOutput(text, container, error) {
     term.insertBefore(container.find(".blob-wrapper"));
   }
   else {
-    term.insertBefore(container.find(".commit-create")); 
+    if (container.find(".blob").length) {
+      term.insertBefore(container.find(".blob"));
+    }
+    else {
+      term.insertBefore(container.find(".commit-create")); 
+    }
   }
 
   term.slideDown("fast");
@@ -75,12 +88,13 @@ $(document).ready(function() {
     var onSuccess = function(text, status, req) {
       btn.removeClass("working").text("Run");
       var code = parseInt(req.getResponseHeader("x-run-exitcode"));
-      renderOutput(text, container, code > 0);
+      var format = req.getResponseHeader("content-type");
+      renderOutput(format, text, container, code > 0);
     }
 
     var onError = function(text) {
       btn.removeClass("working").text("Run");
-      renderOutput(text, container, true);
+      renderOutput("text/plain", text, container, true);
     }
 
     runCode(payload, onSuccess, onError);
