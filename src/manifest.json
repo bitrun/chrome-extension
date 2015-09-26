@@ -10,8 +10,7 @@
   "content_scripts": [
     {
       "matches": [
-        "http://*/*",
-        "https://*/*"
+        "https://gist.github.com/*"
       ],
       "js": [
         "jquery.min.js",
