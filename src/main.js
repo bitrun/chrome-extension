@@ -1,6 +1,12 @@
+var apiUrl = null;
+
+chrome.runtime.sendMessage({messageName: "getApiUrl"}, function(resp) {
+  apiUrl = resp.url;
+});
+
 function runCode(payload, successCb, errorCb) {
   $.ajax({
-    url: "https://bit.run/run",
+    url: apiUrl + "/run",
     method: "POST",
     data: payload,
     success: successCb,

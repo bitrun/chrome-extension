@@ -23,6 +23,11 @@
       "run_at": "document_end"
     }
   ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
   "icons": {
     "19": "logo.png",
     "32": "logo.png",
