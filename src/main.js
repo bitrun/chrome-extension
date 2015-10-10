@@ -6,7 +6,7 @@ chrome.runtime.sendMessage({messageName: "getApiUrl"}, function(resp) {
 
 function runCode(payload, successCb, errorCb) {
   $.ajax({
-    url: apiUrl + "/run",
+    url: apiUrl + "/api/v1/run",
     method: "POST",
     data: payload,
     success: successCb,
