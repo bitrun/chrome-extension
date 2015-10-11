@@ -3,7 +3,7 @@
   "name": "BitRun",
   "author": "Dan Sosedoff",
   "description": "Execute Github Gists",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "permissions": [
     "tabs"
   ],
